@@ -1,15 +1,18 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
-  labels:
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+  # labels:
+  #   chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      cluster: calculi-k8s
   template:
     metadata:
       labels:
-        app: {{ template "fullname" . }}
+        cluster: calculi-k8s
     spec:
       containers:
       - name: {{ .Chart.Name }}

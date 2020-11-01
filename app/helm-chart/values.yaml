@@ -10,8 +10,12 @@ image:
 
 service:
   name: go-app
+  # type: LoadBalancer
   type: NodePort
-  externalPort: 3000
+  backendProtocol: http
+  secure: false
+  # ssl_cert_arn: "arn:aws:iam::818130157321:server-certificate/calculi-wildcard-20301231"
+  externalPort: 80
   internalPort: 3000
 
 resources:
