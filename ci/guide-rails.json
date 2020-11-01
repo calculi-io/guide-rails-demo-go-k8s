@@ -144,7 +144,7 @@
 					}
 				},
 				"docker_options": {
-					"repository": "pinaki124/kubedeploy:0.1.5"
+					"repository": "pinaki124/kubedeploy"
 				},
 				"source_code_available": true
 			}
