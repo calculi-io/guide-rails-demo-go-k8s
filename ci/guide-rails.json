@@ -1,6 +1,6 @@
 {
 	"metadata": {
-		"version": 1
+		"version": 2
 	},
 	"application": {
 		"name": "go-k8s",
@@ -74,7 +74,7 @@
 							{
 								"name": "Build",
 								"definition": "Build",
-								"command": "go build -o ((application.name))",
+								"command": "cd app-code\ngo build -o ((application.name))",
 								"properties": null
 							}
 						],
@@ -83,7 +83,14 @@
 				]
 			}
 		],
-		"exit_actions": {},
+		"exit_actions": {
+			"default": {
+				"code_analysis": {
+					"publish": true,
+					"properties": null
+				}
+			}
+		},
 		"default_properties": null,
 		"deployment_files": [],
 		"application_init": {
