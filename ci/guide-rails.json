@@ -92,7 +92,7 @@
 					{
 						"name": "Initialize K8S environment",
 						"definition": "Initialize K8S environment",
-						"command": "mkdir -p $HOME/.kube\nprintf \"${EKS_CONFIG}\" \u003e $HOME/.kube/config",
+						"command": "mkdir -p $HOME/.kube\nprintf \"${EKS_CONFIG}\" \u003e $HOME/.kube/config\nchmod 600 $HOME/.kube/config",
 						"properties": null
 					},
 					{
