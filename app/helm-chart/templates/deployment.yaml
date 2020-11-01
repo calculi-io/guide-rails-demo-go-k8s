@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         cluster: calculi-k8s
+        app: {{ template "fullname" . }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
