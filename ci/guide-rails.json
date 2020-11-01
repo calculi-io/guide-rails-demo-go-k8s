@@ -81,6 +81,72 @@
 						"docker_options": {}
 					}
 				]
+			},
+			{
+				"name": "Integration",
+				"segment_type": "integration",
+				"run_after": [
+					"Build"
+				],
+				"job_steps": [
+					{
+						"name": "Initialize K8S environment",
+						"definition": "Initialize K8S environment",
+						"command": "mkdir -p $HOME/.kube\nprintf \"${EKS_CONFIG}\" \u003e $HOME/.kube/config",
+						"properties": null
+					},
+					{
+						"name": "helm install app chart",
+						"definition": "helm install app chart",
+						"command": "helm upgrade -i --atomic ${K8S_APP_NAME} app/helm-chart/\n",
+						"properties": null
+					},
+					{
+						"name": "Test application connectivity",
+						"definition": "Test application connectivity",
+						"command": "export NODE_PORT=$(kubectl get services --namespace default -o jsonpath=\"{.spec.ports[0].port}\" ${K8S_APP_NAME})\nexport NODE_IP=$(kubectl get pod --namespace default -l app=go-k8s -o jsonpath=\"{.items[0].status.podIP}\")\n\necho \"Application is running on: http://$NODE_IP:$NODE_PORT/\"\n\nif [ $(curl -s -o /dev/null -I -w \"%{http_code}\" http://$NODE_IP:$NODE_PORT/) -eq 200 ]; then\necho \"Test passed. Application OK\"\nfi\n\n",
+						"properties": null
+					}
+				],
+				"exit_actions": {},
+				"properties": [
+					{
+						"name": "k8s.app.name",
+						"value": "((application.name))-((application.branch))-((application.shortsha))"
+					}
+				],
+				"deployment_strategy": {
+					"canaries": 1,
+					"max_in_flight": 1,
+					"canary_watch_time": "5000-30000",
+					"update_watch_time": "5000-30000",
+					"serial": false
+				},
+				"application_init": {},
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				},
+				"docker_options": {
+					"repository": "pinaki124/kubedeploy:0.1.5"
+				},
+				"source_code_available": true
 			}
 		],
 		"exit_actions": {
