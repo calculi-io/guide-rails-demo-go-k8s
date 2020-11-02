@@ -1,0 +1,5 @@
+# helm install --atomic --debug registry docker/helm-chart/ --set imageCredentials.username=admin --set imageCredentials.password=xxxxxxxxxxxxx 
+apiVersion: v2
+description: A Helm chart for managing docker registry access control
+name: registry
+version: 0.1.0

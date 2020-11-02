@@ -14,6 +14,17 @@
 			{
 				"name": "Build",
 				"segment_type": "build",
+				"publish_attributes": {
+					"publish": true,
+					"docker_attributes": {
+						"repository": "go-k8s",
+						"tags": [
+							"((application.version))",
+							"latest"
+						],
+						"path": ""
+					}
+				},
 				"exit_actions": {},
 				"properties": [
 					{
@@ -74,7 +85,7 @@
 							{
 								"name": "Build",
 								"definition": "Build",
-								"command": "cd app-code\ngo build -o ((application.name))",
+								"command": "cd app-code\ngo build -o http-sample",
 								"properties": null
 							}
 						],
@@ -96,21 +107,27 @@
 						"properties": null
 					},
 					{
+						"name": "Set release name",
+						"definition": "Set release name",
+						"command": "echo \"${K8S_APP_NAME}\" | tr '_' '-' \u003e k8s_release_name",
+						"properties": null
+					},
+					{
 						"name": "helm install app chart",
 						"definition": "helm install app chart",
-						"command": "helm upgrade -i --atomic ${K8S_APP_NAME} app/helm-chart/\n\necho \"Describe pod\"\nkubectl get pod --namespace default -l app=${K8S_APP_NAME} -o json\n",
+						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm upgrade -i --atomic ${K8S_APP_NAME} app/helm-chart/\n\necho \"Describe pod\"\nkubectl get pod --namespace default -l app=${K8S_APP_NAME} -o json\n",
 						"properties": null
 					},
 					{
 						"name": "Test application connectivity",
 						"definition": "Test application connectivity",
-						"command": "export NODE_PORT=$(kubectl get services --namespace default -o jsonpath=\"{.spec.ports[0].port}\" ${K8S_APP_NAME})\nexport NODE_IP=$(kubectl get pod --namespace default -l app=go-k8s -o jsonpath=\"{.items[0].status.podIP}\")\n\necho \"Application is running on: http://$NODE_IP:$NODE_PORT/\"\n\nif [ $(curl -s -o /dev/null -I -w \"%{http_code}\" http://$NODE_IP:$NODE_PORT/) -eq 200 ]; then\necho \"Test passed. Application OK\"\nfi\n\n",
+						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nexport NODE_PORT=$(kubectl get services --namespace default -o jsonpath=\"{.spec.ports[0].port}\" ${K8S_APP_NAME})\nexport NODE_IP=$(kubectl get pod --namespace default -l app=${K8S_APP_NAME} -o jsonpath=\"{.items[0].status.podIP}\")\n\necho \"Application is running on: http://$NODE_IP:$NODE_PORT/\"\n\nif [ $(curl -s -o /dev/null -I -w \"%{http_code}\" http://$NODE_IP:$NODE_PORT/) -eq 200 ]; then\necho \"Test passed. Application OK\"\nfi\n\n",
 						"properties": null
 					},
 					{
 						"name": "Teardown install",
 						"definition": "Teardown install",
-						"command": "helm uninstall ${K8S_APP_NAME}",
+						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm uninstall ${K8S_APP_NAME}",
 						"properties": null
 					}
 				],
@@ -150,7 +167,7 @@
 					}
 				},
 				"docker_options": {
-					"repository": "pinaki124/kubedeploy"
+					"repository": "kubedeploy"
 				},
 				"source_code_available": true
 			}

@@ -4,8 +4,8 @@
 replicaCount: 1
 
 image:
-  repository: mdhont/go-app 
-  tag: 0.1.0
+  repository: docker.calculi.io:443/go-k8s
+  tag: latest
   pullPolicy: IfNotPresent
 
 service:
