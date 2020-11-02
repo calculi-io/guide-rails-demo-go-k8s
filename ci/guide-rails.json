@@ -98,7 +98,7 @@
 					{
 						"name": "helm install app chart",
 						"definition": "helm install app chart",
-						"command": "helm upgrade -i --atomic ${K8S_APP_NAME} app/helm-chart/\n",
+						"command": "helm upgrade -i --atomic ${K8S_APP_NAME} app/helm-chart/\n\necho \"Describe pod\"\nkubectl get pod --namespace default -l app=${K8S_APP_NAME} -o json\n",
 						"properties": null
 					},
 					{
