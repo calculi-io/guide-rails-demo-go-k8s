@@ -14,6 +14,17 @@
 			{
 				"name": "Build",
 				"segment_type": "build",
+				"publish_attributes": {
+					"publish": true,
+					"docker_attributes": {
+						"repository": "go-k8s",
+						"tags": [
+							"((application.version))",
+							"latest"
+						],
+						"path": ""
+					}
+				},
 				"exit_actions": {},
 				"properties": [
 					{
@@ -74,7 +85,7 @@
 							{
 								"name": "Build",
 								"definition": "Build",
-								"command": "cd app-code\ngo build -o ((application.name))",
+								"command": "cd app-code\ngo build -o http-sample",
 								"properties": null
 							}
 						],
@@ -150,7 +161,7 @@
 					}
 				},
 				"docker_options": {
-					"repository": "pinaki124/kubedeploy"
+					"repository": "kubedeploy"
 				},
 				"source_code_available": true
 			}
