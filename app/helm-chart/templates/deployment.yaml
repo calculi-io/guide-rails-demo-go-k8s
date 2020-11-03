@@ -8,11 +8,11 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      cluster: calculi-k8s
+      cluster: {{ .Values.cluster.name }}
   template:
     metadata:
       labels:
-        cluster: calculi-k8s
+        cluster: {{ .Values.cluster.name }}
         app: {{ template "fullname" . }}
     spec:
       imagePullSecrets:
