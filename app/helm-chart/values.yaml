@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: docker.calculi.io:443/go-k8s
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   name: go-app
