@@ -115,7 +115,7 @@
 					{
 						"name": "helm install app chart",
 						"definition": "helm install app chart",
-						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm upgrade -i --atomic ${K8S_APP_NAME} app/helm-chart/\n\necho \"Describe pod\"\nkubectl get pod --namespace default -l app=${K8S_APP_NAME} -o json\n",
+						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm upgrade -i --atomic ${K8S_APP_NAME} app/helm-chart/ --set image.repository=${GR_DOCKERREGISTRY_REPO_URL}/go-k8s --set image.tag=${APPLICATION_VERSION}\n\necho \"Describe pod\"\nkubectl get pod --namespace default -l app=${K8S_APP_NAME} -o json\n",
 						"properties": null
 					},
 					{
