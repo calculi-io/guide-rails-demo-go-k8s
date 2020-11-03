@@ -107,9 +107,15 @@
 						"properties": null
 					},
 					{
-						"name": "Set release name",
-						"definition": "Set release name",
+						"name": "Set application release name",
+						"definition": "Set application release name",
 						"command": "echo \"${K8S_APP_NAME}\" | tr '_' '-' \u003e k8s_release_name",
+						"properties": null
+					},
+					{
+						"name": "Install docker registry K8S secret",
+						"definition": "Install docker registry K8S secret",
+						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm upgrade -i --atomic ${DOCKER_REGISTRY_RELEASE_NAME} docker/helm-chart/ --set imageCredentials.registry=${GR_DOCKERREGISTRY_REPO_URL} --set imageCredentials.password=${GR_DOCKERREGISTRY_PASSWORD}",
 						"properties": null
 					},
 					{
