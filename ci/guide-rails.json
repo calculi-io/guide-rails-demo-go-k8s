@@ -115,7 +115,7 @@
 					{
 						"name": "Install docker registry K8S secret",
 						"definition": "Install docker registry K8S secret",
-						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm upgrade -i --debug --atomic ${DOCKER_REGISTRY_RELEASE_NAME} docker/helm-chart/ --set imageCredentials.registry=${GR_DOCKERREGISTRY_REPO_URL} --set imageCredentials.registryPort=443 --set imageCredentials.password=${GR_DOCKERREGISTRY_PASSWORD}",
+						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm upgrade -i --debug --atomic ${DOCKER_REGISTRY_RELEASE_NAME} docker/helm-chart/ --set imageCredentials.registry=${GR_DOCKERREGISTRY_REPO_URL} --set imageCredentials.password=${GR_DOCKERREGISTRY_PASSWORD}",
 						"properties": null
 					},
 					{
