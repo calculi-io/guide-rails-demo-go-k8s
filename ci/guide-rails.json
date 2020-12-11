@@ -310,6 +310,22 @@
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
+			},
+			{
+				"name": "docker-resource",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-docker-image",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "eks-tools",
+				"image": {
+					"name": "docker-registry.service.consul:443/pipeline-image-eks-tools",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
 			}
 		],
 		"notification_configurations": null,
