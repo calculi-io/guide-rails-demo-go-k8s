@@ -175,7 +175,108 @@
 				"docker_options": {
 					"repository": "kubedeploy"
 				},
-				"source_code_available": true
+				"source_code_available": true,
+				"k8s_instance_groups": [
+					{
+						"tool_config_alias_id": "be3ae31e-51a7-4d2b-41ad-a3c3d9d8773b",
+						"name": "((application.name))",
+						"cluster_name": "",
+						"namespace": "((application.name))",
+						"replicas": 1,
+						"containers": [
+							{
+								"name": "((application.name))",
+								"image": "go-k8s:((application.version))",
+								"ports": [
+									{
+										"hostPort": 3000,
+										"containerPort": 3000,
+										"protocol": "TCP"
+									}
+								],
+								"resources": {},
+								"readinessProbe": {
+									"exec": {}
+								},
+								"imagePullPolicy": "Always",
+								"securityContext": {
+									"privileged": true
+								}
+							}
+						],
+						"autoscaling": {
+							"metadata": {
+								"creationTimestamp": null
+							},
+							"spec": {
+								"scaleTargetRef": {
+									"kind": "",
+									"name": ""
+								},
+								"minReplicas": 0,
+								"maxReplicas": 0,
+								"metrics": [
+									{
+										"type": "Resource",
+										"resource": {
+											"name": "cpu",
+											"target": {
+												"type": "Value"
+											}
+										}
+									},
+									{
+										"type": "Resource",
+										"resource": {
+											"name": "memory",
+											"target": {
+												"type": "Value"
+											}
+										}
+									}
+								]
+							},
+							"status": {
+								"currentReplicas": 0,
+								"desiredReplicas": 0,
+								"currentMetrics": null,
+								"conditions": null
+							}
+						},
+						"ingress": {
+							"metadata": {
+								"creationTimestamp": null
+							},
+							"spec": {
+								"rules": [
+									{
+										"host": "((application.name)).calculi.io",
+										"http": {
+											"paths": [
+												{
+													"path": "/",
+													"backend": {
+														"servicePort": "80"
+													}
+												}
+											]
+										}
+									}
+								]
+							},
+							"status": {
+								"loadBalancer": {}
+							}
+						},
+						"dns_hosted_zone": "calculi.io",
+						"service_name": "((application.name))-((application.shortsha))",
+						"alb_ingress_controller_annotations": {
+							"alb.ingress.kubernetes.io/healthcheck-path": "/",
+							"alb.ingress.kubernetes.io/healthcheck-port": "traffic-port",
+							"alb.ingress.kubernetes.io/scheme": "HTTP"
+						}
+					}
+				]
 			}
 		],
 		"exit_actions": {
