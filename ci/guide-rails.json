@@ -141,7 +141,13 @@
 				"properties": [
 					{
 						"name": "k8s.app.name",
-						"value": "((application.name))-((application.branch))-((application.shortsha))"
+						"value": "((application.name))-((application.branch))-((application.shortsha))",
+						"type": "string"
+					},
+					{
+						"name": "gr.dockerregistry.repo_url",
+						"value": "docker.calculi.io:443",
+						"type": "string"
 					}
 				],
 				"deployment_strategy": {
