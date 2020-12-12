@@ -143,11 +143,6 @@
 						"name": "k8s.app.name",
 						"value": "((application.name))-((application.branch))-((application.shortsha))",
 						"type": "string"
-					},
-					{
-						"name": "gr.dockerregistry.repo_url",
-						"value": "docker.calculi.io:443",
-						"type": "string"
 					}
 				],
 				"deployment_strategy": {
@@ -192,7 +187,7 @@
 						"containers": [
 							{
 								"name": "((application.name))",
-								"image": "docker.calculi.io:443/go-k8s:((application.version))",
+								"image": "((gr.dockerregistry.repo_url))/go-k8s:((application.version))",
 								"ports": [
 									{
 										"hostPort": 3000,
