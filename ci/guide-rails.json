@@ -186,7 +186,7 @@
 						"containers": [
 							{
 								"name": "((application.name))",
-								"image": "go-k8s:((application.version))",
+								"image": "docker.calculi.io:443/go-k8s:((application.version))",
 								"ports": [
 									{
 										"hostPort": 3000,
