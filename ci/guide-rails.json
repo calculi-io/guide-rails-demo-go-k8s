@@ -276,7 +276,8 @@
 							"alb.ingress.kubernetes.io/scheme": "HTTP"
 						}
 					}
-				]
+				],
+				"deployment_target": 2
 			}
 		],
 		"exit_actions": {
