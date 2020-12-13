@@ -193,9 +193,8 @@
 										"resource": {
 											"name": "cpu",
 											"target": {
-												"type": "Value",
-												"value": "30",
-												"averageUtilization": 70
+												"type": "Utilization",
+												"averageUtilization": "70"
 											}
 										}
 									},
@@ -204,9 +203,8 @@
 										"resource": {
 											"name": "memory",
 											"target": {
-												"type": "Value",
-												"value": "40",
-												"averageUtilization": 50
+												"type": "Utilization",
+												"averageUtilization": "40"
 											}
 										}
 									}
