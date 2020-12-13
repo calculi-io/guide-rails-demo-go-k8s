@@ -215,15 +215,16 @@
 									"kind": "",
 									"name": ""
 								},
-								"minReplicas": 0,
-								"maxReplicas": 0,
+								"minReplicas": 2,
+								"maxReplicas": 4,
 								"metrics": [
 									{
 										"type": "Resource",
 										"resource": {
 											"name": "cpu",
 											"target": {
-												"type": "Value"
+												"type": "Utilization",
+												"averageUtilization": 70
 											}
 										}
 									},
@@ -232,7 +233,8 @@
 										"resource": {
 											"name": "memory",
 											"target": {
-												"type": "Value"
+												"type": "Utilization",
+												"averageUtilization": 50
 											}
 										}
 									}
