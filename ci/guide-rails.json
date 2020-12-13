@@ -183,7 +183,7 @@
 						"tool_config_alias_id": "be3ae31e-51a7-4d2b-41ad-a3c3d9d8773b",
 						"name": "((application.name))",
 						"cluster_name": "",
-						"namespace": "((application.name))",
+						"namespace": "((application.name))-((application.grbranch))",
 						"replicas": 1,
 						"containers": [
 							{
