@@ -102,39 +102,9 @@
 				],
 				"job_steps": [
 					{
-						"name": "Initialize K8S environment",
-						"definition": "Initialize K8S environment",
-						"command": "mkdir -p $HOME/.kube\nprintf \"${EKS_CONFIG}\" \u003e $HOME/.kube/config\nchmod 600 $HOME/.kube/config",
-						"properties": null
-					},
-					{
-						"name": "Set application release name",
-						"definition": "Set application release name",
-						"command": "echo \"${K8S_APP_NAME}\" | tr '_' '-' \u003e k8s_release_name",
-						"properties": null
-					},
-					{
-						"name": "Install docker registry K8S secret",
-						"definition": "Install docker registry K8S secret",
-						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm upgrade -i --atomic ${DOCKER_REGISTRY_RELEASE_NAME} docker/helm-chart/ --set imageCredentials.registry=${GR_DOCKERREGISTRY_REPO_URL} --set imageCredentials.password=${GR_DOCKERREGISTRY_PASSWORD}",
-						"properties": null
-					},
-					{
-						"name": "helm install app chart",
-						"definition": "helm install app chart",
-						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm upgrade -i --atomic ${K8S_APP_NAME} app/helm-chart/ --set image.repository=${GR_DOCKERREGISTRY_REPO_URL}/go-k8s --set image.tag=${APPLICATION_VERSION}\n\necho \"Describe pod\"\nkubectl get pod --namespace default -l app=${K8S_APP_NAME} -o json\n",
-						"properties": null
-					},
-					{
-						"name": "Test application connectivity",
-						"definition": "Test application connectivity",
-						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nexport NODE_PORT=$(kubectl get services --namespace default -o jsonpath=\"{.spec.ports[0].port}\" ${K8S_APP_NAME})\nexport NODE_IP=$(kubectl get pod --namespace default -l app=${K8S_APP_NAME} -o jsonpath=\"{.items[0].status.podIP}\")\n\necho \"Application is running on: http://$NODE_IP:$NODE_PORT/\"\n\nif [ $(curl -s -o /dev/null -I -w \"%{http_code}\" http://$NODE_IP:$NODE_PORT/) -eq 200 ]; then\necho \"Test passed. Application OK\"\nfi\n\n",
-						"properties": null
-					},
-					{
-						"name": "Teardown install",
-						"definition": "Teardown install",
-						"command": "export K8S_APP_NAME=$(cat k8s_release_name)\n\nhelm uninstall ${K8S_APP_NAME}",
+						"name": "Env",
+						"definition": "Env",
+						"command": "env",
 						"properties": null
 					}
 				],
