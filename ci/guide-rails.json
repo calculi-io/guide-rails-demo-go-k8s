@@ -208,7 +208,6 @@
 									"successThreshold": 5,
 									"failureThreshold": 3
 								},
-								"readinessProbe": {},
 								"imagePullPolicy": "Always",
 								"securityContext": {
 									"privileged": true
