@@ -172,10 +172,7 @@
 										"path": "/",
 										"port": 3000,
 										"scheme": "HTTP"
-									},
-									"initialDelaySeconds": 5,
-									"periodSeconds": 60,
-									"successThreshold": 1
+									}
 								},
 								"imagePullPolicy": "Always",
 								"securityContext": {
