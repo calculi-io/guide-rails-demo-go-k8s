@@ -168,7 +168,14 @@
 								],
 								"resources": {},
 								"readinessProbe": {
-									"exec": {}
+									"httpGet": {
+										"path": "/",
+										"port": 3000,
+										"scheme": "HTTP"
+									},
+									"initialDelaySeconds": 5,
+									"periodSeconds": 60,
+									"successThreshold": 1
 								},
 								"imagePullPolicy": "Always",
 								"securityContext": {
@@ -194,7 +201,7 @@
 											"name": "cpu",
 											"target": {
 												"type": "AverageValue",
-												"averageValue": 70
+												"averageValue": "70"
 											}
 										}
 									},
@@ -204,7 +211,7 @@
 											"name": "memory",
 											"target": {
 												"type": "AverageValue",
-												"averageValue": 40
+												"averageValue": "40"
 											}
 										}
 									}
