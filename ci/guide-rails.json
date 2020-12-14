@@ -167,7 +167,7 @@
 									}
 								],
 								"resources": {},
-								"readinessProbe": {
+								"livenessProbe": {
 									"httpGet": {
 										"path": "/",
 										"port": 3000,
