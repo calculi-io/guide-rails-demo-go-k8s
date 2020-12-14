@@ -1,0 +1,40 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ template "fullname" . }}
+#   labels:
+#     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+#   annotations:
+# {{/* This is a sample for creating an AWS ELB (not ALB) as part of deploying a service */}}
+#       service.beta.kubernetes.io/aws-load-balancer-internal: "false"
+# {{- if .Values.service.secure }}
+#       service.beta.kubernetes.io/aws-load-balancer-ssl-cert: {{ .Values.service.ssl_cert_arn }}
+#       service.beta.kubernetes.io/aws-load-balancer-ssl-ports: {{ .Values.service.externalPort | quote }}
+#       service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy: "ELBSecurityPolicy-TLS-1-2-2017-01"
+#       service.beta.kubernetes.io/aws-load-balancer-backend-protocol: {{ .Values.service.backendProtocol }}
+# {{- end }}
+# spec:
+#   type: {{ .Values.service.type }}
+#   ports:
+#   - port: {{ .Values.service.externalPort }}
+#     targetPort: {{ .Values.service.internalPort }}
+#     protocol: TCP
+#     name: {{ .Values.service.name }}
+#   selector:
+#     app: {{ template "fullname" . }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}-v2"
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+  - port: {{ .Values.service.internalPort }}
+    targetPort: {{ .Values.service.internalPort }}
+    protocol: TCP
+    name: {{ .Values.service.name }}
+  selector:
+    app: {{ template "fullname" . }}

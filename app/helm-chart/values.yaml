@@ -1,0 +1,31 @@
+# Default values for go-k8s.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+
+cluster:
+  name: calculi-k8s
+image:
+  repository: docker.calculi.io:443/go-k8s
+  tag: latest
+  pullPolicy: Always
+
+service:
+  name: go-app
+  # type: LoadBalancer
+  type: NodePort
+  backendProtocol: http
+  secure: false
+  # ssl_cert_arn: "arn:aws:iam::818130157321:server-certificate/calculi-wildcard-20301231"
+  externalPort: 3000
+  internalPort: 3000
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+

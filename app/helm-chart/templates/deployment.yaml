@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  # labels:
+  #   chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      cluster: {{ .Values.cluster.name }}
+  template:
+    metadata:
+      labels:
+        cluster: {{ .Values.cluster.name }}
+        app: {{ template "fullname" . }}
+    spec:
+      imagePullSecrets:
+      - name: registry
+      volumes:
+      - name: go-k8s-secrets
+        secret:
+          secretName: registry
+          {{/* Octal notation for file permission 0400 */}}
+          defaultMode: 256
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.internalPort }}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.service.internalPort }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.service.internalPort }}
+        resources:
+{{ toYaml .Values.resources | indent 12 }}
