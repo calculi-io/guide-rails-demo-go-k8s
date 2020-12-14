@@ -205,7 +205,7 @@
 									},
 									"initialDelaySeconds": 5,
 									"periodSeconds": 60,
-									"successThreshold": 5,
+									"successThreshold": 1,
 									"failureThreshold": 3
 								},
 								"imagePullPolicy": "Always",
