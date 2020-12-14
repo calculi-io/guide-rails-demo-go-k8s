@@ -197,9 +197,18 @@
 									}
 								],
 								"resources": {},
-								"readinessProbe": {
-									"exec": {}
+								"livenessProbe": {
+									"httpGet": {
+										"path": "/",
+										"port": 3000,
+										"scheme": "HTTP"
+									},
+									"initialDelaySeconds": 5,
+									"periodSeconds": 60,
+									"successThreshold": 5,
+									"failureThreshold": 3
 								},
+								"readinessProbe": {},
 								"imagePullPolicy": "Always",
 								"securityContext": {
 									"privileged": true
