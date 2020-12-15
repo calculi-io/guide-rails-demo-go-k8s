@@ -23,5 +23,5 @@ func TestHTTPHandler(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	assert.Equal(t, string(response), "Congratulations! Your Go application has been successfully deployed on Kubernetes. Your application name is ")
+	assert.Equal(t, string(response), "Congratulations! Your Go application has been successfully deployed on Kubernetes. Your application name is go-k8s")
 }
