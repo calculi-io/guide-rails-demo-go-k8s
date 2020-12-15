@@ -171,7 +171,13 @@
 									"httpGet": {
 										"path": "/",
 										"port": 3000,
-										"scheme": "HTTP"
+										"scheme": "HTTP",
+										"httpHeaders": [
+											{
+												"name": "Custom-Header",
+												"value": "Awesome"
+											}
+										]
 									},
 									"initialDelaySeconds": 10,
 									"periodSeconds": 60
