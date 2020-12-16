@@ -194,7 +194,7 @@
 											"name": "cpu",
 											"target": {
 												"type": "AverageValue",
-												"averageValue": 70
+												"averageValue": "70"
 											}
 										}
 									},
@@ -204,7 +204,7 @@
 											"name": "memory",
 											"target": {
 												"type": "AverageValue",
-												"averageValue": 40
+												"averageValue": "40"
 											}
 										}
 									}
@@ -231,6 +231,131 @@
 													"path": "/",
 													"backend": {
 														"servicePort": "80"
+													}
+												}
+											]
+										}
+									}
+								]
+							},
+							"status": {
+								"loadBalancer": {}
+							}
+						},
+						"dns_hosted_zone": "calculi.io",
+						"service_name": "((application.name))-((application.shortsha))",
+						"alb_ingress_controller_annotations": {
+							"alb.ingress.kubernetes.io/healthcheck-path": "/",
+							"alb.ingress.kubernetes.io/healthcheck-port": "traffic-port",
+							"alb.ingress.kubernetes.io/scheme": "internet-facing"
+						}
+					}
+				],
+				"deployment_target": 2
+			},
+			{
+				"name": "Production",
+				"segment_type": "production",
+				"persistent": true,
+				"run_after": [
+					"Integration"
+				],
+				"exit_actions": {},
+				"deployment_strategy": {
+					"canaries": 1,
+					"max_in_flight": 1,
+					"canary_watch_time": "5000-30000",
+					"update_watch_time": "5000-30000",
+					"serial": false
+				},
+				"application_init": {},
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				},
+				"k8s_instance_groups": [
+					{
+						"tool_config_alias_id": "be3ae31e-51a7-4d2b-41ad-a3c3d9d8773b",
+						"name": "((application.name))",
+						"cluster_name": "",
+						"namespace": "((application.name))",
+						"replicas": 1,
+						"containers": [
+							{
+								"name": "((application.name))",
+								"image": "((gr.dockerregistry.repo_url))/go-k8s:((application.version))",
+								"ports": [
+									{
+										"hostPort": 3000,
+										"containerPort": 3000,
+										"protocol": "TCP"
+									}
+								],
+								"resources": {},
+								"imagePullPolicy": "Always"
+							}
+						],
+						"autoscaling": {
+							"metadata": {
+								"creationTimestamp": null
+							},
+							"spec": {
+								"scaleTargetRef": {
+									"kind": "",
+									"name": ""
+								},
+								"minReplicas": 1,
+								"maxReplicas": 2,
+								"metrics": [
+									{
+										"type": "Resource",
+										"resource": {
+											"name": "cpu",
+											"target": {
+												"type": "Utilization",
+												"averageUtilization": 80
+											}
+										}
+									}
+								]
+							},
+							"status": {
+								"currentReplicas": 0,
+								"desiredReplicas": 0,
+								"currentMetrics": null,
+								"conditions": null
+							}
+						},
+						"ingress": {
+							"metadata": {
+								"creationTimestamp": null
+							},
+							"spec": {
+								"rules": [
+									{
+										"host": "((application.name)).calculi.io",
+										"http": {
+											"paths": [
+												{
+													"path": "/",
+													"backend": {
+														"servicePort": 80
 													}
 												}
 											]
