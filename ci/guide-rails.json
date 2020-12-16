@@ -85,7 +85,7 @@
 							{
 								"name": "Build",
 								"definition": "Build",
-								"command": "cd app-code\ngo build -o http-sample ",
+								"command": "cd app-code\ngo build -o http-sample",
 								"properties": null
 							}
 						],
