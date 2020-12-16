@@ -387,7 +387,13 @@
 				}
 			}
 		},
-		"default_properties": null,
+		"default_properties": [
+			{
+				"name": "gr.scm.release.branch",
+				"value": "main",
+				"type": "string"
+			}
+		],
 		"deployment_files": [],
 		"application_init": {
 			"command": "bin/start-service.sh"
