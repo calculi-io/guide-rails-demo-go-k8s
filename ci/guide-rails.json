@@ -167,9 +167,6 @@
 									}
 								],
 								"resources": {},
-								"readinessProbe": {
-									"exec": {}
-								},
 								"imagePullPolicy": "Always",
 								"securityContext": {
 									"privileged": true
