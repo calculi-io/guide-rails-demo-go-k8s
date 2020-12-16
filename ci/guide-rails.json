@@ -263,8 +263,7 @@
 							}
 						},
 						"ingress_controller_args": {
-							"key1": "value1",
-							"key2": "2"
+							"key1": "value5"
 						},
 						"dns_hosted_zone": "calculi.io",
 						"service_name": "((application.name))-((application.shortsha))",
