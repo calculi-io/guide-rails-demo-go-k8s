@@ -168,10 +168,10 @@
 								],
 								"resources": {
 									"limits": {
-										"memory": "2Gi"
+										"memory": "10Gi"
 									},
 									"requests": {
-										"memory": "2Gi"
+										"memory": "10Gi"
 									}
 								},
 								"livenessProbe": {
