@@ -263,7 +263,8 @@
 							}
 						},
 						"ingress_controller_args": {
-							"key1": "value5"
+							"aws-region": "us-east-1",
+							"aws-vpc-id": "vpc-0153673cd7038818d"
 						},
 						"dns_hosted_zone": "calculi.io",
 						"service_name": "((application.name))-((application.shortsha))",
