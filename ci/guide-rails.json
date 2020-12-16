@@ -262,6 +262,10 @@
 								"loadBalancer": {}
 							}
 						},
+						"ingress_controller_args": {
+							"key1": "value1",
+							"key2": "2"
+						},
 						"dns_hosted_zone": "calculi.io",
 						"service_name": "((application.name))-((application.shortsha))",
 						"alb_ingress_controller_annotations": {
