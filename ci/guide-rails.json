@@ -384,6 +384,7 @@
 				}
 			}
 		},
+		"default_properties": null,
 		"deployment_files": [],
 		"application_init": {
 			"command": "bin/start-service.sh"
