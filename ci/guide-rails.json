@@ -406,7 +406,7 @@
 			{
 				"name": "pipeline",
 				"image": {
-					"name": "docker-registry.service.consul:443/pipeline-image-cli",
+					"name": "docker-registry.service.consul:443/pipeline-image-cli-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
@@ -422,7 +422,7 @@
 			{
 				"name": "deployment",
 				"image": {
-					"name": "docker-registry.service.consul:443/pipeline-image-cli",
+					"name": "docker-registry.service.consul:443/pipeline-image-cli-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
