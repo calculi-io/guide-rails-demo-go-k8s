@@ -161,7 +161,7 @@
 								"command": [
 									"/bin/sh",
 									"-ec",
-									"echo \"This is my init container\""
+									"echo \"This is my init container\"\necho \"This is my init container\""
 								],
 								"resources": {
 									"limits": {
