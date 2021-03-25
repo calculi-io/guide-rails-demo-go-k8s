@@ -154,6 +154,31 @@
 						"cluster_name": "",
 						"namespace": "((application.name))-((application.shortsha))",
 						"replicas": 1,
+						"init_containers": [
+							{
+								"name": "((application.name))-1",
+								"image": "ubuntu:latest",
+								"command": [
+									"/bin/sh",
+									"-ec",
+									"echo \"This is my init container\""
+								],
+								"resources": {
+									"limits": {
+										"cpu": "50m",
+										"memory": "50Mi"
+									},
+									"requests": {
+										"cpu": "50m",
+										"memory": "50Mi"
+									}
+								},
+								"imagePullPolicy": "IfNotPresent",
+								"securityContext": {
+									"privileged": false
+								}
+							}
+						],
 						"containers": [
 							{
 								"name": "((application.name))",
@@ -167,12 +192,12 @@
 								],
 								"resources": {
 									"limits": {
-										"cpu": "50m",
-										"memory": "50Mi"
+										"cpu": "100m",
+										"memory": "100Mi"
 									},
 									"requests": {
-										"cpu": "50m",
-										"memory": "50Mi"
+										"cpu": "100m",
+										"memory": "100Mi"
 									}
 								},
 								"imagePullPolicy": "Always",
