@@ -565,7 +565,7 @@
 			{
 				"name": "eks-tools",
 				"image": {
-					"name": "docker-registry.service.consul:443/pipeline-image-eks-tools-test",
+					"name": "docker-registry.service.consul:443/pipeline-image-eks-tools",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
