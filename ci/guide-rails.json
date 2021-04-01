@@ -279,7 +279,17 @@
 							"alb.ingress.kubernetes.io/healthcheck-path": "/",
 							"alb.ingress.kubernetes.io/healthcheck-port": "traffic-port",
 							"alb.ingress.kubernetes.io/scheme": "internet-facing"
-						}
+						},
+						"volumes": [
+							{
+								"persistent": true,
+								"size": "1Gi",
+								"mount_path": "/var/vcap/store",
+								"attributes": {
+									"ReadWriteOnce": "true"
+								}
+							}
+						]
 					}
 				],
 				"deployment_target": 2
