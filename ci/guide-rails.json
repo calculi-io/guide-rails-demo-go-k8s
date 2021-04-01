@@ -278,7 +278,7 @@
 						"alb_ingress_controller_annotations": {
 							"alb.ingress.kubernetes.io/healthcheck-path": "/",
 							"alb.ingress.kubernetes.io/healthcheck-port": "traffic-port",
-							"alb.ingress.kubernetes.io/scheme": "internet-facing"
+							"alb.ingress.kubernetes.io/scheme": "internal"
 						},
 						"volumes": [
 							{
