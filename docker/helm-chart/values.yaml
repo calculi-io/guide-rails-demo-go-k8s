@@ -1,4 +1,0 @@
-imageCredentials:
-  registry: docker.calculi.io:443
-  email: admin@calculi.com
-  username: admin
